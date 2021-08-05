@@ -25,7 +25,7 @@ namespace eFoodHub.Repositories
             {
                 //optionsBuilder.UseSqlServer(@"data source=DESKTOP-H9K9JVI\emrep;initial catalog=eFoodHubSite;integrated security=True;");
 
-                optionsBuilder.UseSqlServer(@"data source=DESKTOP-H9K9JVI\emrep;initial catalog=eFoodHubSite; persist security info=True; user id = sa; password=1");
+                optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-H9K9JVI\SQLEXPRESS;Initial Catalog=eFoodHub;Integrated Security=True;");
             }
             base.OnConfiguring(optionsBuilder); 
         }
