@@ -31,17 +31,54 @@ namespace eFoodHub.Repositories.Implementations
 
         public int DeleteItem(Guid cardId, int itemId)
         {
-            throw new NotImplementedException();
+            var item = appContext.CardItems.Where(ci => ci.CardId == cardId && ci.Id == itemId).FirstOrDefault();
+            if (item != null)
+            {
+                appContext.CardItems.Remove(item);
+                return appContext.SaveChanges();
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public int UpdateQuantity(Guid cardId, int itemId, int Quantity)
         {
-            throw new NotImplementedException();
+            bool flag = false;
+            var card = GetCard(cardId);
+            if (card!= null)
+            {
+                for (int i = 0; i < card.Items.Count; i++)
+                {
+                    if (card.Items[i].Id == itemId)
+                    {
+                        flag = true;
+                        if (Quantity < 0 && card.Items[i].Quantity > 1 )
+                        {
+                            card.Items[i].Quantity += (Quantity);
+                        }
+                        else if(Quantity > 0)
+                        {
+                            card.Items[i].Quantity += (Quantity);
+                        }
+                        break;
+                    }
+                }
+                if (flag)
+                {
+                    return appContext.SaveChanges();
+                }
+            }
+            return 0;
         }
 
         public int UpdateCard(Guid cardId, int userId)
         {
-            throw new NotImplementedException();
+            Card card = GetCard(cardId);
+            card.UserId = userId;
+            return appContext.SaveChanges();
         }
+         
     }
 }
