@@ -21,7 +21,7 @@ namespace eFoodHub.Repositories.Implementations
         {
             _dbContext.Set<TEntity>().Add(entity);
         }
-
+         
         public void Delete(object Id)
         {
             TEntity entity = _dbContext.Set<TEntity>().Find(Id);

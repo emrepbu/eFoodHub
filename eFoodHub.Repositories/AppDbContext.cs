@@ -12,8 +12,8 @@ namespace eFoodHub.Repositories
         public DbSet<ItemType> ItemTypes { get; set; }
         public DbSet<Order> Orders{ get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Card> Cards { get; set; }
+        public DbSet<CardItem> CardItems { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<PaymentDetails> PaymentDetails { get; set; }
 

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace eFoodHub.Entities
 {
-    public class CartItem
+    public class CardItem
     {
-        public CartItem()
+        public CardItem()
         {
             // required by EF
         }
-        public CartItem(int itemId, int quantity, decimal unitPrice) 
+        public CardItem(int itemId, int quantity, decimal unitPrice) 
         {
             ItemId = itemId;
             Quantity = quantity;
@@ -27,7 +27,7 @@ namespace eFoodHub.Entities
         public int Quantity { get; set; }
 
         [JsonIgnore]
-        public Cart Cart { get; set; }
-
+        public Card Card { get; set; }
+//        public Guid CardId { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace eFoodHub.Entities
         public decimal Total { get; set; }
         public string Email { get; set; }
         public string Status { get; set; }
-        public Guid CartId { get; set; }
+        public Guid CardId { get; set; }
         public int UserId { get; set; }
         public decimal GrandTotal { get; set; }
 

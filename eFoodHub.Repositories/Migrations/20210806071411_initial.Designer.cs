@@ -10,7 +10,7 @@ using eFoodHub.Repositories;
 namespace eFoodHub.Repositories.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210805064411_initial")]
+    [Migration("20210806071411_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,7 +152,7 @@ namespace eFoodHub.Repositories.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("eFoodHub.Entities.Cart", b =>
+            modelBuilder.Entity("eFoodHub.Entities.Card", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,10 +169,10 @@ namespace eFoodHub.Repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Cards");
                 });
 
-            modelBuilder.Entity("eFoodHub.Entities.CartItem", b =>
+            modelBuilder.Entity("eFoodHub.Entities.CardItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -180,9 +180,6 @@ namespace eFoodHub.Repositories.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<Guid>("CardId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CartId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ItemId")
@@ -196,9 +193,9 @@ namespace eFoodHub.Repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
+                    b.HasIndex("CardId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CardItems");
                 });
 
             modelBuilder.Entity("eFoodHub.Entities.Category", b =>
@@ -338,7 +335,7 @@ namespace eFoodHub.Repositories.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("CartId")
+                    b.Property<Guid>("CardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Currency")
@@ -523,13 +520,15 @@ namespace eFoodHub.Repositories.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("eFoodHub.Entities.CartItem", b =>
+            modelBuilder.Entity("eFoodHub.Entities.CardItem", b =>
                 {
-                    b.HasOne("eFoodHub.Entities.Cart", "Cart")
+                    b.HasOne("eFoodHub.Entities.Card", "Card")
                         .WithMany("Items")
-                        .HasForeignKey("CartId");
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Cart");
+                    b.Navigation("Card");
                 });
 
             modelBuilder.Entity("eFoodHub.Entities.Item", b =>
@@ -560,7 +559,7 @@ namespace eFoodHub.Repositories.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("eFoodHub.Entities.Cart", b =>
+            modelBuilder.Entity("eFoodHub.Entities.Card", b =>
                 {
                     b.Navigation("Items");
                 });

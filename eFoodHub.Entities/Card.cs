@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace eFoodHub.Entities
 {
-    public class Cart
+    public class Card
     {
-        public Cart()
+        public Card()
         {
-            Items = new List<CartItem>();
+            Items = new List<CardItem>();
             CreatedDate = DateTime.Now;
             IsActive = false;
         }
         public Guid Id { get; set; }
         public int UserId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public virtual List<CartItem> Items { get; private set; }
+        public virtual List<CardItem> Items { get; private set; }
         public bool IsActive { get; set; }
     
     

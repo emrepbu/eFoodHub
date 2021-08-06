@@ -69,7 +69,7 @@ namespace eFoodHub.Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carts",
+                name: "Cards",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -79,7 +79,7 @@ namespace eFoodHub.Repositories.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => x.Id);
+                    table.PrimaryKey("PK_Cards", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,7 +140,7 @@ namespace eFoodHub.Repositories.Migrations
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     GrandTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
@@ -256,7 +256,7 @@ namespace eFoodHub.Repositories.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CartItems",
+                name: "CardItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -264,18 +264,17 @@ namespace eFoodHub.Repositories.Migrations
                     CardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.PrimaryKey("PK_CardItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CartItems_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
+                        name: "FK_CardItems_Cards_CardId",
+                        column: x => x.CardId,
+                        principalTable: "Cards",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -371,9 +370,9 @@ namespace eFoodHub.Repositories.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_CartId",
-                table: "CartItems",
-                column: "CartId");
+                name: "IX_CardItems_CardId",
+                table: "CardItems",
+                column: "CardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_CategoryId",
@@ -412,7 +411,7 @@ namespace eFoodHub.Repositories.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CartItems");
+                name: "CardItems");
 
             migrationBuilder.DropTable(
                 name: "Items");
@@ -430,7 +429,7 @@ namespace eFoodHub.Repositories.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "Cards");
 
             migrationBuilder.DropTable(
                 name: "Categories");
