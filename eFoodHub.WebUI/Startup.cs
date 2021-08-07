@@ -1,3 +1,7 @@
+using eFoodHub.Services.Configration;
+using eFoodHub.Services.Implementations;
+using eFoodHub.Services.Interfaces;
+using eFoodHub.WebUI.Configration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace eFoodHub.WebUI
-{
+{ 
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -22,6 +26,8 @@ namespace eFoodHub.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureDependencies.AddServices(services);
+            ConfigureRepositories.AddServices(services, Configuration);
             services.AddControllersWithViews();
         }
 
